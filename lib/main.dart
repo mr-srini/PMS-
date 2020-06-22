@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'login_page.dart';
+import 'package:pms/userpages/userstart.dart';
 
 void main() => runApp(Starting());
 
@@ -15,11 +16,11 @@ class _StartingState extends State<Starting> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        scaffoldBackgroundColor: Colors.black12,
+        scaffoldBackgroundColor: Colors.white,
         accentColor: Color(0xFF1376FF),
       ),
       home: Scaffold(
-        body: LoginPage(),
+        body: UserStartPage(),
       ),
     );
   }
