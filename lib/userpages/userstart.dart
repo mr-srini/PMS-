@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pms/constants.dart';
 
 class UserStartPage extends StatelessWidget {
   @override
@@ -8,38 +9,39 @@ class UserStartPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         // crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          FlatButton(
-            onPressed: () {  },
+          FlatButton
+            onPressed: (){
+
+            },
             child: Container(
               margin: EdgeInsets.all(5),
               padding: EdgeInsets.symmetric(vertical: 25, horizontal: 100),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50),
-                  color: Color(0xff5c5bb0)),
+                  borderRadius: BorderRadius.circular(50), color: buttonColor),
               child: Text(
                 "Check in",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
-                    fontSize: 20.0,
-                    letterSpacing: 5),
+                    fontSize: fontSize,
+                    letterSpacing: letterspacing),
               ),
             ),
           ),
           FlatButton(
-
-            onPressed: () {  },
+            onPressed: () {
+              print("checkout");
+            },
             child: Container(
               margin: EdgeInsets.all(5),
               padding: EdgeInsets.symmetric(vertical: 25, horizontal: 92),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50),
-                  color: Color(0xff5c5bb0)),
+                  borderRadius: BorderRadius.circular(50), color: buttonColor),
               child: Text(
                 "Check out",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: textColor,
                     fontSize: 20.0,
                     letterSpacing: 5),
               ),
