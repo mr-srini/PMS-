@@ -20,7 +20,7 @@ class _StartingState extends State<Starting> {
         accentColor: Color(0xFF1376FF),
       ),
       home: Scaffold(
-        body: UserStartPage(),
+        body: LoginPage(),
       ),
     );
   }
