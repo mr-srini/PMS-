@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'login_page.dart';
-import 'package:pms/userpages/userstart.dart';
 import 'constants.dart';
 
 void main() => runApp(Starting());
@@ -18,9 +17,10 @@ class _StartingState extends State<Starting> {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.white,
-        accentColor: accentColor,
+        accentColor: kaccentColor,
       ),
       home: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: LoginPage(),
       ),
     );
