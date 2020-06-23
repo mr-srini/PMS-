@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pms/adminpages/AdminDashboard.dart';
 import 'package:pms/constants.dart';
 import 'textfield.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
@@ -87,7 +88,7 @@ class _LoginPageState extends State<LoginPage> {
                       setState(() {
 //DATABASE VALADITING
                         if (username == 'Srini' && password == '123') {
-                          return Alert(
+                           Alert(
                             style: AlertStyle(
                               animationDuration: Duration(milliseconds: 250),
                             ),
@@ -97,8 +98,8 @@ class _LoginPageState extends State<LoginPage> {
                             desc: "Admin Logged in",
                             buttons: [],
                           ).show();
+                          Navigator.push(context, new MaterialPageRoute(builder: (context)=>AdminDashboard()));
                         } else
-// ignore: missing_return
                           return Alert(
                             style: AlertStyle(
                               animationDuration: Duration(milliseconds: 250),
@@ -127,8 +128,6 @@ class _LoginPageState extends State<LoginPage> {
                             letterSpacing: 5),
                       ),
                     ),
-//color: Color(0xff1376ff),
-//padding: EdgeInsets.only(left: 75, right: 75),
                   ),
                 ],
               ),

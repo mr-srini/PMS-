@@ -9,6 +9,9 @@ class UserStartPage extends StatelessWidget {
         //mainAxisAlignment: MainAxisAlignment.center,
         // crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
+          FlatButton
+            onPressed: (){
+            },
           ClipPath(
             clipper: MyClipper(),
             child: Container(

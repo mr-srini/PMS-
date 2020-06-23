@@ -21,7 +21,7 @@ class _StartingState extends State<Starting> {
         accentColor: accentColor,
       ),
       home: Scaffold(
-        body: UserStartPage(),
+        body: LoginPage(),
       ),
     );
   }
