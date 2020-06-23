@@ -10,13 +10,11 @@ class UserStartPage extends StatelessWidget {
         // crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           FlatButton(
-
             child: Container(
               margin: EdgeInsets.all(5),
               padding: EdgeInsets.symmetric(vertical: 25, horizontal: 100),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50),
-                  color: buttonColor),
+                  borderRadius: BorderRadius.circular(50), color: buttonColor),
               child: Text(
                 "Check in",
                 style: TextStyle(
@@ -35,8 +33,7 @@ class UserStartPage extends StatelessWidget {
               margin: EdgeInsets.all(5),
               padding: EdgeInsets.symmetric(vertical: 25, horizontal: 92),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50),
-                  color:buttonColor),
+                  borderRadius: BorderRadius.circular(50), color: buttonColor),
               child: Text(
                 "Check out",
                 style: TextStyle(

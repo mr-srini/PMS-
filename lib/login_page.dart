@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pms/constants.dart';
 import 'textfield.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
@@ -25,14 +26,15 @@ class _LoginPageState extends State<LoginPage> {
       child: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
-            backgroundColor: Color(0xff5c5bb0),
+            backgroundColor: buttonColor,
             expandedHeight: 300.0,
             floating: true,
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
               title: Text(
                 "PMS",
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: textColor,
+                letterSpacing: letterspacing,fontSize: fontSize),
               ),
               background: Image(
                 image: AssetImage("images/loginpage.jpg"),
@@ -109,7 +111,7 @@ class _LoginPageState extends State<LoginPage> {
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                        color: Color(0xff5c5bb0),
+                        color: buttonColor,
                         borderRadius: BorderRadius.circular(50),
                       ),
                       padding:
