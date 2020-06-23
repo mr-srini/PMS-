@@ -33,8 +33,10 @@ class _LoginPageState extends State<LoginPage> {
             flexibleSpace: FlexibleSpaceBar(
               title: Text(
                 "PMS",
-                style: TextStyle(color: textColor,
-                letterSpacing: letterspacing,fontSize: fontSize),
+                style: TextStyle(
+                    color: textColor,
+                    letterSpacing: letterspacing,
+                    fontSize: fontSize),
               ),
               background: Image(
                 image: AssetImage("images/loginpage.jpg"),
