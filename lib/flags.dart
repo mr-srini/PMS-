@@ -1,4 +1,5 @@
 bool bikeSelectedFlag = false,
     defaultEnabled = false,
     rfidflag = true,
-    helmetflag = true;
+    helmetflag = true,
+    isTax = false;
