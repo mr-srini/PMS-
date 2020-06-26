@@ -31,6 +31,7 @@ dependencies:
   rflutter_alert: ^1.0.3
   animated_text_kit: ^2.2.0
   flutter_nfc_reader: ^0.1.0
+  http: ^0.12.1
 
 
 dev_dependencies:

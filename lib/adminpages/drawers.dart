@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pms/adminpages/Settings.dart';
 import 'package:pms/adminpages/customermaster.dart';
 import 'package:pms/adminpages/organizatinmaster.dart';
 import 'package:pms/adminpages/slabmaster.dart';
@@ -58,6 +59,11 @@ class Drawers extends StatelessWidget {
             title: Text('Vehicle Pass Details'),
             onTap: (){Navigator.push(context, new MaterialPageRoute(builder: (context)=>VehiclePassDetails()));},
             leading: Icon(Icons.info),
+          ),
+          ListTile(
+            title: Text('Settings'),
+            onTap: (){Navigator.push(context, new MaterialPageRoute(builder: (context)=>Settings()));},
+            leading: Icon(Icons.settings),
           ),
         ],
       ),

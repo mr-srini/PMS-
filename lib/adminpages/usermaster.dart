@@ -1,6 +1,8 @@
+
 import 'package:flutter/material.dart';
 import 'package:pms/constants.dart';
 import 'package:pms/textfield.dart';
+
 
 TextEditingController cusername = TextEditingController();
 TextEditingController cpassword = TextEditingController();
@@ -16,6 +18,27 @@ class _UserMasterState extends State<UserMaster> {
   var statusSelected = 'Active', userSelected = 'User';
   var _status = ['Active','Inactive'];
   var _userType = ['Admin' , 'User'];
+
+//  void insertData() async{
+//    String url = "http://197.0.0.1/www/PHP/UserMasterTable.php";
+//    var res = await http.post(Uri.encodeFull(url),
+//    body: {
+//      'user_id': "1",
+//      'user_name':cusername.toString(),
+//      'user_phone':cphn.toString(),
+//      'user_status': statusSelected.toString(),
+//      'user_type': userSelected.toString(),
+//      'user_pass': cpassword.toString(),
+//      'created_on': DateTime.now().toString(),
+//      'created_by': "admin",
+//      'modified_on': DateTime.now().toString(),
+//      'modified_by': "admin",
+//    });
+//
+//    var respBody = json.decode(res.body);
+//    print(respBody);
+//  }
+
   @override
   Widget build(BuildContext context) {
     cusername.addListener(() {
@@ -63,7 +86,7 @@ class _UserMasterState extends State<UserMaster> {
               cornerRadius: BorderRadius.circular(50),
               width: 400,
               height: 70,
-              inputType: TextInputType.text,
+              inputType: TextInputType.number,
               prefixIcon: Icon(Icons.phone),
               controller: cphn,
               placeholder: "Phone",
@@ -161,6 +184,7 @@ class _UserMasterState extends State<UserMaster> {
             ),
             FlatButton(
               onPressed: () {
+//                insertData();
               },
               child: Container(
                 decoration: BoxDecoration(
@@ -186,6 +210,7 @@ class _UserMasterState extends State<UserMaster> {
                       letterSpacing: 5),
                 ),
               ),
+
             ),
           ],
         ),
