@@ -5,6 +5,7 @@ import 'package:pms/Printing/wifiprinter.dart';
 import '../ComponentsAndConstants/constants.dart';
 import 'Methods/CinFormFields.dart';
 import '../ComponentsAndConstants/flags.dart';
+import 'package:http/http.dart' as http;
 
 // ignore: camel_case_types
 class nCheckin extends StatefulWidget {
@@ -15,11 +16,11 @@ class nCheckin extends StatefulWidget {
 // ignore: camel_case_types
 class _nCheckinState extends State<nCheckin> {
   //TODO:List for selecting the vehicle type from DB.
-  List<String> _vtype = ['Bike', 'Car', 'Bus'];
+  List<String> _vtype = ['Bike', 'car', 'Bus'];
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool bikeSelectedFlag = false;
-  String _rfidNumber = "RFID SCAN", selecteditem;
+  String _rfidNumber = "Scan RFID Card", selecteditem;
   bool isprint = false, validated = false;
   int groupValue = 1;
   // ignore: non_constant_identifier_names
@@ -308,6 +309,7 @@ class _nCheckinState extends State<nCheckin> {
                 ),
                 onPressed: () {
                   validate();
+                  checkinInsert();
                   setState(() {
                     if (isprint && validated) {
                       if (groupValue == 2) {
@@ -352,14 +354,30 @@ class _nCheckinState extends State<nCheckin> {
   validate() {
     if (_formKey.currentState.validate()) {
       validated = true;
-      print(CinMethods.vehicleNumber);
-      print(CinMethods.alternateNumber);
-      print(CinMethods.numberOfHelmet);
       //TODO:Instead of print() hit API to insert into DB
       CinMethods.clear();
       return;
     } else {
       _formKey.currentState.save();
+    }
+  }
+
+  Future<void> checkinInsert() async {
+    Map data = {
+      "RfidNumberT": _rfidNumber,
+      "idNumber": CinMethods.alternateNumber,
+      "vnumber": CinMethods.vehicleNumber,
+      "vtype": selecteditem,
+    };
+    print(data);
+    var response =
+        await http.post('http://192.168.43.252/www/API/insert.php', body: data);
+    try {
+      if (response.statusCode == 200) {
+        print("INSTERED");
+      }
+    } catch (Exception) {
+      print("Agalla");
     }
   }
 }

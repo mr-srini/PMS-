@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../ComponentsAndConstants/constants.dart';
-import '../ComponentsAndConstants/textfield.dart';
+import 'package:pms/ComponentsAndConstants/constants.dart';
+import 'package:pms/ComponentsAndConstants/textfield.dart';
 
 TextEditingController cRfid = TextEditingController();
 TextEditingController caltrTag = TextEditingController();

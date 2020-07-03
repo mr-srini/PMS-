@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pms/adminpages/Settings.dart';
+import 'package:pms/adminpages/URL.dart';
 import 'package:pms/adminpages/customermaster.dart';
 import 'package:pms/adminpages/organizatinmaster.dart';
 import 'package:pms/adminpages/slabmaster.dart';
@@ -7,8 +8,8 @@ import 'package:pms/adminpages/tagmaster.dart';
 import 'package:pms/adminpages/taxmaster.dart';
 import 'package:pms/adminpages/usermaster.dart';
 import 'package:pms/adminpages/vehiclemaster.dart';
-import 'package:pms/adminpages/vehiclepassdetails.dart';
-import 'package:pms/adminpages/vehiclspass.dart';
+import 'package:pms/adminpages/vehiclepass.dart';
+import 'package:pms/adminpages/vehiclspassdetails.dart';
 class Drawers extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -64,6 +65,11 @@ class Drawers extends StatelessWidget {
             title: Text('Settings'),
             onTap: (){Navigator.push(context, new MaterialPageRoute(builder: (context)=>Settings()));},
             leading: Icon(Icons.settings),
+          ),
+          ListTile(
+            title: Text('URL'),
+            onTap: (){Navigator.push(context, new MaterialPageRoute(builder: (context)=>URL()));},
+            leading: Icon(Icons.http),
           ),
         ],
       ),

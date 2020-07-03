@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../ComponentsAndConstants/constants.dart';
-import '../ComponentsAndConstants/textfield.dart';
+import 'package:pms/ComponentsAndConstants//constants.dart';
+import 'package:pms/ComponentsAndConstants//textfield.dart';
 
 TextEditingController cusername = TextEditingController();
 TextEditingController cpassword = TextEditingController();
@@ -18,22 +18,21 @@ class _UserMasterState extends State<UserMaster> {
   var _userType = ['Admin', 'User'];
 
 //  void insertData() async{
-//    String url = "http://197.0.0.1/www/PHP/UserMasterTable.php";
+//    String url = "http://192.168.43.196/www/PHP/UserMasterTable.php";
 //    var res = await http.post(Uri.encodeFull(url),
 //    body: {
-//      'user_id': "1",
-//      'user_name':cusername.toString(),
-//      'user_phone':cphn.toString(),
-//      'user_status': statusSelected.toString(),
-//      'user_type': userSelected.toString(),
-//      'user_pass': cpassword.toString(),
-//      'created_on': DateTime.now().toString(),
+//      'user_name':cusername.text,
+//      'user_phone':cphn.text,
+//      'user_status': statusSelected,
+//      'user_type': userSelected,
+//      'user_pass': cpassword.text,
+//      'created_on': DateTime.now(),
 //      'created_by': "admin",
-//      'modified_on': DateTime.now().toString(),
+//      'modified_on': DateTime.now(),
 //      'modified_by': "admin",
 //    });
 //
-//    var respBody = json.decode(res.body);
+//    var respBody = json.encode(res.body);
 //    print(respBody);
 //  }
 

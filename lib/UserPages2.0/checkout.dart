@@ -1,10 +1,13 @@
+import 'dart:convert';
+
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/material.dart';
 import 'package:nfc_in_flutter/nfc_in_flutter.dart';
-import 'file:///E:/FlutterProjects/PMS-/lib/UserPages2.0/Methods/CoutFormFields.dart';
+import '../UserPages2.0/Methods/CoutFormFields.dart';
 import 'package:pms/Printing/bluetoothprinter.dart';
 import '../ComponentsAndConstants/constants.dart';
 import '../ComponentsAndConstants/flags.dart';
+import 'package:http/http.dart' as http;
 
 // ignore: camel_case_types
 class nCheckout extends StatefulWidget {
@@ -328,6 +331,7 @@ class _nCheckoutState extends State<nCheckout> {
                   ),
                   onPressed: () {
                     validate();
+                    checkout();
                     setState(() {
                       if (isprint && validated)
                         Navigator.push(
@@ -441,5 +445,21 @@ class _nCheckoutState extends State<nCheckout> {
     setState(() {
       ToggleSBVnumber = !ToggleSBVnumber;
     });
+  }
+
+  Future<void> checkout() async {
+    Map data = {'transaction_id': CoutMethods.ticketNumber};
+    print(data);
+    var response = await http
+        .post('http://192.168.43.252/www/PHP/VehiclePass.php', body: data);
+    try {
+      if (response.statusCode == 200) {
+        print("inside");
+        var userJson = json.decode(response.body);
+        print(userJson);
+      }
+    } catch (Exception) {
+      print("Gothilla");
+    }
   }
 }

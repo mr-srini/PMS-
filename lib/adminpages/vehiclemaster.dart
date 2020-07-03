@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import '../ComponentsAndConstants/flags.dart' as flags;
-import '../ComponentsAndConstants/constants.dart';
-import '../ComponentsAndConstants/textfield.dart';
+import 'package:pms/ComponentsAndConstants/flags.dart' as flags;
+
+import '../ComponentsAndConstants//constants.dart';
+import '../ComponentsAndConstants//textfield.dart';
 
 TextEditingController cVehicleType = TextEditingController();
 TextEditingController cAccessKey = TextEditingController();
