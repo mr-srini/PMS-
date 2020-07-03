@@ -1,11 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:pms/constants.dart';
+import '../ComponentsAndConstants/constants.dart';
+import '../ComponentsAndConstants/textfield.dart';
 
-import '../textfield.dart';
-
-String name,phn,dl,address,totalvehicle;
+String name, phn, dl, address, totalvehicle;
 int vehicleAllowed;
 TextEditingController cname = TextEditingController();
 TextEditingController cphn = TextEditingController();
@@ -13,6 +12,7 @@ TextEditingController cdl = TextEditingController();
 TextEditingController caddress = TextEditingController();
 TextEditingController ctotalVehicle = TextEditingController();
 TextEditingController cvehicleAllowed = TextEditingController();
+
 class CustomerMaster extends StatefulWidget {
   @override
   _CustomerMasterState createState() => _CustomerMasterState();
@@ -21,16 +21,28 @@ class CustomerMaster extends StatefulWidget {
 class _CustomerMasterState extends State<CustomerMaster> {
   var statusSelected = 'Active';
   var orgSelected = 'prestige';
-  var _status = ['Active','Inactive'];
-  var _orgainzation = ['prestige','sankalp'];
+  var _status = ['Active', 'Inactive'];
+  var _orgainzation = ['prestige', 'sankalp'];
   @override
   Widget build(BuildContext context) {
-    cname.addListener(() { name = cname.text;});
-    cphn.addListener(() { phn = cphn.text;});
-    cdl.addListener(() { dl = cdl.text;});
-    caddress.addListener(() { address = caddress.text;});
-    ctotalVehicle.addListener(() { totalvehicle = ctotalVehicle.text;});
-    cvehicleAllowed.addListener(() { vehicleAllowed = cvehicleAllowed.text as int;});
+    cname.addListener(() {
+      name = cname.text;
+    });
+    cphn.addListener(() {
+      phn = cphn.text;
+    });
+    cdl.addListener(() {
+      dl = cdl.text;
+    });
+    caddress.addListener(() {
+      address = caddress.text;
+    });
+    ctotalVehicle.addListener(() {
+      totalvehicle = ctotalVehicle.text;
+    });
+    cvehicleAllowed.addListener(() {
+      vehicleAllowed = cvehicleAllowed.text as int;
+    });
     return Scaffold(
       appBar: AppBar(
         title: Text('Customer Master'),
@@ -119,40 +131,35 @@ class _CustomerMasterState extends State<CustomerMaster> {
                 width: 400,
                 decoration: BoxDecoration(
                     color: Color(0xff818181),
-                    borderRadius: BorderRadius.circular(50)
-                ),
+                    borderRadius: BorderRadius.circular(50)),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text('Status',
-                      style: TextStyle(
-                          fontSize: 20
-                      ),
+                    Text(
+                      'Status',
+                      style: TextStyle(fontSize: 20),
                     ),
                     SizedBox(
                       width: 10,
                     ),
                     DropdownButton<String>(
-                      items: _status.map((String dropDownItem){
+                      items: _status.map((String dropDownItem) {
                         return DropdownMenuItem<String>(
                           value: dropDownItem,
                           child: Text(
                             dropDownItem,
-                            style: TextStyle(
-                                fontSize: 20
-                            ),
+                            style: TextStyle(fontSize: 20),
                           ),
                         );
                       }).toList(),
-                      onChanged: (String selectedStatus){
+                      onChanged: (String selectedStatus) {
                         setState(() {
                           this.statusSelected = selectedStatus;
                         });
                       },
                       value: statusSelected,
                     ),
-
                   ],
                 ),
               ),
@@ -163,73 +170,66 @@ class _CustomerMasterState extends State<CustomerMaster> {
                 height: 75,
                 width: 400,
                 decoration: BoxDecoration(
-                  color: Color(0xff818181),
-                  borderRadius: BorderRadius.circular(50)
-                ),
+                    color: Color(0xff818181),
+                    borderRadius: BorderRadius.circular(50)),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text('Organization',
-                      style: TextStyle(
-                          fontSize: 20
-                      ),
+                    Text(
+                      'Organization',
+                      style: TextStyle(fontSize: 20),
                     ),
                     SizedBox(
                       width: 10,
                     ),
                     DropdownButton<String>(
-                      items: _orgainzation.map((String dropDownItem){
+                      items: _orgainzation.map((String dropDownItem) {
                         return DropdownMenuItem<String>(
                           value: dropDownItem,
                           child: Text(
                             dropDownItem,
-                            style: TextStyle(
-                                fontSize: 20
-                            ),
+                            style: TextStyle(fontSize: 20),
                           ),
                         );
                       }).toList(),
-                      onChanged: (String selectedStatus){
+                      onChanged: (String selectedStatus) {
                         setState(() {
                           this.orgSelected = selectedStatus;
                         });
                       },
                       value: orgSelected,
                     ),
-
                   ],
                 ),
               ),
             ),
-          FlatButton(
-            onPressed: () {
-            },
-            child: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topRight,
-                  end: Alignment.bottomLeft,
-                  colors: [
-                    Color(0xFF3383CD),
-                    kbuttonColor,
-                  ],
+            FlatButton(
+              onPressed: () {},
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topRight,
+                    end: Alignment.bottomLeft,
+                    colors: [
+                      Color(0xFF3383CD),
+                      kbuttonColor,
+                    ],
+                  ),
+                  color: kbuttonColor,
+                  borderRadius: BorderRadius.circular(50),
                 ),
-                color: kbuttonColor,
-                borderRadius: BorderRadius.circular(50),
-              ),
-              padding:
-              EdgeInsets.symmetric(vertical: 20, horizontal: 75),
-              child: Text(
-                'REGISTER',
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    fontSize: 20.0,
-                    letterSpacing: 5),
+                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 75),
+                child: Text(
+                  'REGISTER',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontSize: 20.0,
+                      letterSpacing: 5),
+                ),
               ),
             ),
-          ),
             SizedBox(
               height: 30,
             ),

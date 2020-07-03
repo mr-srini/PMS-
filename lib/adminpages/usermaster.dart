@@ -1,13 +1,11 @@
-
 import 'package:flutter/material.dart';
-import 'package:pms/constants.dart';
-import 'package:pms/textfield.dart';
-
+import '../ComponentsAndConstants/constants.dart';
+import '../ComponentsAndConstants/textfield.dart';
 
 TextEditingController cusername = TextEditingController();
 TextEditingController cpassword = TextEditingController();
 TextEditingController cphn = TextEditingController();
-String username,password,phn;
+String username, password, phn;
 
 class UserMaster extends StatefulWidget {
   @override
@@ -16,8 +14,8 @@ class UserMaster extends StatefulWidget {
 
 class _UserMasterState extends State<UserMaster> {
   var statusSelected = 'Active', userSelected = 'User';
-  var _status = ['Active','Inactive'];
-  var _userType = ['Admin' , 'User'];
+  var _status = ['Active', 'Inactive'];
+  var _userType = ['Admin', 'User'];
 
 //  void insertData() async{
 //    String url = "http://197.0.0.1/www/PHP/UserMasterTable.php";
@@ -101,33 +99,29 @@ class _UserMasterState extends State<UserMaster> {
                 width: 400,
                 decoration: BoxDecoration(
                     color: Color(0xff818181),
-                    borderRadius: BorderRadius.circular(50)
-                ),
+                    borderRadius: BorderRadius.circular(50)),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text('Status',
-                      style: TextStyle(
-                          fontSize: 20
-                      ),
+                    Text(
+                      'Status',
+                      style: TextStyle(fontSize: 20),
                     ),
                     SizedBox(
                       width: 10,
                     ),
                     DropdownButton<String>(
-                      items: _status.map((String dropDownItem){
+                      items: _status.map((String dropDownItem) {
                         return DropdownMenuItem<String>(
                           value: dropDownItem,
                           child: Text(
                             dropDownItem,
-                            style: TextStyle(
-                                fontSize: 20
-                            ),
+                            style: TextStyle(fontSize: 20),
                           ),
                         );
                       }).toList(),
-                      onChanged: (String selectedStatus){
+                      onChanged: (String selectedStatus) {
                         setState(() {
                           this.statusSelected = selectedStatus;
                         });
@@ -145,33 +139,29 @@ class _UserMasterState extends State<UserMaster> {
                 width: 400,
                 decoration: BoxDecoration(
                     color: Color(0xff818181),
-                    borderRadius: BorderRadius.circular(50)
-                ),
+                    borderRadius: BorderRadius.circular(50)),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text('User Type',
-                      style: TextStyle(
-                          fontSize: 20
-                      ),
+                    Text(
+                      'User Type',
+                      style: TextStyle(fontSize: 20),
                     ),
                     SizedBox(
                       width: 10,
                     ),
                     DropdownButton<String>(
-                      items: _userType.map((String dropDownItem){
+                      items: _userType.map((String dropDownItem) {
                         return DropdownMenuItem<String>(
                           value: dropDownItem,
                           child: Text(
                             dropDownItem,
-                            style: TextStyle(
-                                fontSize: 20
-                            ),
+                            style: TextStyle(fontSize: 20),
                           ),
                         );
                       }).toList(),
-                      onChanged: (String userSelected){
+                      onChanged: (String userSelected) {
                         setState(() {
                           this.userSelected = userSelected;
                         });
@@ -199,8 +189,7 @@ class _UserMasterState extends State<UserMaster> {
                   color: kbuttonColor,
                   borderRadius: BorderRadius.circular(50),
                 ),
-                padding:
-                EdgeInsets.symmetric(vertical: 20, horizontal: 75),
+                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 75),
                 child: Text(
                   'REGISTER',
                   style: TextStyle(
@@ -210,7 +199,6 @@ class _UserMasterState extends State<UserMaster> {
                       letterSpacing: 5),
                 ),
               ),
-
             ),
           ],
         ),
@@ -218,4 +206,3 @@ class _UserMasterState extends State<UserMaster> {
     );
   }
 }
-

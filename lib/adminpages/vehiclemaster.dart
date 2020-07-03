@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:pms/flags.dart' as flags;
-
-import '../constants.dart';
-import '../textfield.dart';
+import '../ComponentsAndConstants/flags.dart' as flags;
+import '../ComponentsAndConstants/constants.dart';
+import '../ComponentsAndConstants/textfield.dart';
 
 TextEditingController cVehicleType = TextEditingController();
 TextEditingController cAccessKey = TextEditingController();
-String vehicleType,accessKey;
+String vehicleType, accessKey;
+
 class VehicleMaster extends StatefulWidget {
   @override
   _VehicleMasterState createState() => _VehicleMasterState();
@@ -14,11 +14,15 @@ class VehicleMaster extends StatefulWidget {
 
 class _VehicleMasterState extends State<VehicleMaster> {
   var statusSelected = 'Active';
-  var _status = ['Active','Inactive'];
+  var _status = ['Active', 'Inactive'];
   @override
   Widget build(BuildContext context) {
-    cVehicleType.addListener(() {vehicleType=cVehicleType.text;});
-    cAccessKey.addListener(() {accessKey=cAccessKey.text;});
+    cVehicleType.addListener(() {
+      vehicleType = cVehicleType.text;
+    });
+    cAccessKey.addListener(() {
+      accessKey = cAccessKey.text;
+    });
     return Scaffold(
       appBar: AppBar(
         title: Text('Vehicle Master'),
@@ -58,33 +62,29 @@ class _VehicleMasterState extends State<VehicleMaster> {
                 width: 400,
                 decoration: BoxDecoration(
                     color: Color(0xff818181),
-                    borderRadius: BorderRadius.circular(50)
-                ),
+                    borderRadius: BorderRadius.circular(50)),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text('Status',
-                      style: TextStyle(
-                          fontSize: 20
-                      ),
+                    Text(
+                      'Status',
+                      style: TextStyle(fontSize: 20),
                     ),
                     SizedBox(
                       width: 10,
                     ),
                     DropdownButton<String>(
-                      items: _status.map((String dropDownItem){
+                      items: _status.map((String dropDownItem) {
                         return DropdownMenuItem<String>(
                           value: dropDownItem,
                           child: Text(
                             dropDownItem,
-                            style: TextStyle(
-                                fontSize: 20
-                            ),
+                            style: TextStyle(fontSize: 20),
                           ),
                         );
                       }).toList(),
-                      onChanged: (String selectedStatus){
+                      onChanged: (String selectedStatus) {
                         setState(() {
                           this.statusSelected = selectedStatus;
                         });
@@ -102,15 +102,14 @@ class _VehicleMasterState extends State<VehicleMaster> {
                 width: 400,
                 decoration: BoxDecoration(
                     color: Color(0xff818181),
-                    borderRadius: BorderRadius.circular(50)
-                ),
+                    borderRadius: BorderRadius.circular(50)),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Checkbox(
                       value: flags.isTax,
-                      onChanged: (bool value){
+                      onChanged: (bool value) {
                         setState(() {
                           flags.isTax = value;
                         });
@@ -119,22 +118,19 @@ class _VehicleMasterState extends State<VehicleMaster> {
                     SizedBox(
                       width: 10,
                     ),
-                    Text('Tax',
-                      style: TextStyle(
-                          fontSize: 20
-                      ),
+                    Text(
+                      'Tax',
+                      style: TextStyle(fontSize: 20),
                     ),
                   ],
                 ),
               ),
             ),
-
             SizedBox(
               height: 10,
             ),
             FlatButton(
-              onPressed: () {
-              },
+              onPressed: () {},
               child: Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
@@ -148,8 +144,7 @@ class _VehicleMasterState extends State<VehicleMaster> {
                   color: kbuttonColor,
                   borderRadius: BorderRadius.circular(50),
                 ),
-                padding:
-                EdgeInsets.symmetric(vertical: 20, horizontal: 75),
+                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 75),
                 child: Text(
                   'CREATE',
                   style: TextStyle(
@@ -166,4 +161,3 @@ class _VehicleMasterState extends State<VehicleMaster> {
     );
   }
 }
-

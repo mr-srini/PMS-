@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pms/constants.dart';
-import 'package:pms/textfield.dart';
+import '../ComponentsAndConstants/constants.dart';
+import '../ComponentsAndConstants/textfield.dart';
 
 TextEditingController cTax = TextEditingController();
 TextEditingController cTaxValue = TextEditingController();
@@ -11,7 +11,7 @@ TextEditingController cMiscc1Value = TextEditingController();
 TextEditingController cMisc2Name = TextEditingController();
 TextEditingController cMiscc2Value = TextEditingController();
 
-String tax,taxValue,cgst,sgst,misc1Name,misc1Value,misc2Name,misc2Value;
+String tax, taxValue, cgst, sgst, misc1Name, misc1Value, misc2Name, misc2Value;
 
 class TaxMaster extends StatefulWidget {
   @override
@@ -20,17 +20,33 @@ class TaxMaster extends StatefulWidget {
 
 class _TaxMasterState extends State<TaxMaster> {
   var statusSelected = 'Active';
-  var _status = ['Active','Inactive'];
+  var _status = ['Active', 'Inactive'];
   @override
   Widget build(BuildContext context) {
-    cTax.addListener(() {tax = cTax.text;});
-    cTaxValue.addListener(() {taxValue = cTaxValue.text;});
-    cCgst.addListener(() {cgst = cCgst.text;});
-    cSgst.addListener(() {sgst = cSgst.text;});
-    cMisc1Name.addListener(() {misc1Name = cMisc1Name.text;});
-    cMiscc1Value.addListener(() {misc1Value = cMiscc1Value.text;});
-    cMisc2Name.addListener(() {misc2Name = cMisc2Name.text;});
-    cMiscc2Value.addListener(() {misc2Value = cMiscc2Value.text;});
+    cTax.addListener(() {
+      tax = cTax.text;
+    });
+    cTaxValue.addListener(() {
+      taxValue = cTaxValue.text;
+    });
+    cCgst.addListener(() {
+      cgst = cCgst.text;
+    });
+    cSgst.addListener(() {
+      sgst = cSgst.text;
+    });
+    cMisc1Name.addListener(() {
+      misc1Name = cMisc1Name.text;
+    });
+    cMiscc1Value.addListener(() {
+      misc1Value = cMiscc1Value.text;
+    });
+    cMisc2Name.addListener(() {
+      misc2Name = cMisc2Name.text;
+    });
+    cMiscc2Value.addListener(() {
+      misc2Value = cMiscc2Value.text;
+    });
     return Scaffold(
       appBar: AppBar(
         title: Text('Tax Master'),
@@ -142,33 +158,29 @@ class _TaxMasterState extends State<TaxMaster> {
                 width: 400,
                 decoration: BoxDecoration(
                     color: Color(0xff818181),
-                    borderRadius: BorderRadius.circular(50)
-                ),
+                    borderRadius: BorderRadius.circular(50)),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text('Status',
-                      style: TextStyle(
-                          fontSize: 20
-                      ),
+                    Text(
+                      'Status',
+                      style: TextStyle(fontSize: 20),
                     ),
                     SizedBox(
                       width: 10,
                     ),
                     DropdownButton<String>(
-                      items: _status.map((String dropDownItem){
+                      items: _status.map((String dropDownItem) {
                         return DropdownMenuItem<String>(
                           value: dropDownItem,
                           child: Text(
                             dropDownItem,
-                            style: TextStyle(
-                                fontSize: 20
-                            ),
+                            style: TextStyle(fontSize: 20),
                           ),
                         );
                       }).toList(),
-                      onChanged: (String selectedStatus){
+                      onChanged: (String selectedStatus) {
                         setState(() {
                           this.statusSelected = selectedStatus;
                         });
@@ -183,8 +195,7 @@ class _TaxMasterState extends State<TaxMaster> {
               height: 10,
             ),
             FlatButton(
-              onPressed: () {
-              },
+              onPressed: () {},
               child: Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
@@ -198,8 +209,7 @@ class _TaxMasterState extends State<TaxMaster> {
                   color: kbuttonColor,
                   borderRadius: BorderRadius.circular(50),
                 ),
-                padding:
-                EdgeInsets.symmetric(vertical: 20, horizontal: 75),
+                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 75),
                 child: Text(
                   'CREATE',
                   style: TextStyle(
@@ -216,4 +226,3 @@ class _TaxMasterState extends State<TaxMaster> {
     );
   }
 }
-

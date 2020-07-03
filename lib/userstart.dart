@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:pms/clipper.dart';
-import 'package:pms/constants.dart';
+import 'package:pms/UserPages2.0/checkin.dart';
+import 'package:pms/UserPages2.0/checkout.dart';
+import 'file:///E:/FlutterProjects/PMS-/lib/ComponentsAndConstants/clipper.dart';
+import 'file:///E:/FlutterProjects/PMS-/lib/ComponentsAndConstants/constants.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:pms/userpages/check_in.dart';
-import 'package:pms/userpages/check_out.dart';
 
 class UserStartPage extends StatelessWidget {
   @override
@@ -51,7 +51,7 @@ class UserStartPage extends StatelessWidget {
                 Navigator.push(
                   context,
                   new MaterialPageRoute(
-                    builder: (context) => Checkin(),
+                    builder: (context) => nCheckin(),
                   ),
                 );
               },
@@ -85,7 +85,7 @@ class UserStartPage extends StatelessWidget {
                 Navigator.push(
                   context,
                   new MaterialPageRoute(
-                    builder: (context) => Checkout(),
+                    builder: (context) => nCheckout(),
                   ),
                 );
               },

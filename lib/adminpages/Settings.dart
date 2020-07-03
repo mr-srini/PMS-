@@ -1,23 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:pms/flags.dart';
-
-import '../constants.dart';
-import '../textfield.dart';
+import '../ComponentsAndConstants/flags.dart';
+import '../ComponentsAndConstants/constants.dart';
+import '../ComponentsAndConstants/textfield.dart';
 
 class Settings extends StatefulWidget {
   @override
   _SettingsState createState() => _SettingsState();
 }
 
-TextEditingController cPrefix =  TextEditingController();
-TextEditingController cBufferTime =  TextEditingController();
-String prefix,bufferTime;
-class _SettingsState extends State<Settings> {
+TextEditingController cPrefix = TextEditingController();
+TextEditingController cBufferTime = TextEditingController();
+String prefix, bufferTime;
 
+class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
-    cPrefix.addListener(() {prefix = cPrefix.text;});
-    cBufferTime.addListener(() {bufferTime = cBufferTime.text;});
+    cPrefix.addListener(() {
+      prefix = cPrefix.text;
+    });
+    cBufferTime.addListener(() {
+      bufferTime = cBufferTime.text;
+    });
     return Expanded(
       child: Scaffold(
         appBar: AppBar(
@@ -28,65 +31,65 @@ class _SettingsState extends State<Settings> {
           child: Column(
             children: <Widget>[
               Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Icon(Icons.child_friendly, color: Colors.black, size: 30),
-                Text(
-                  "HELMET STATUS",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                      fontSize: 20.0,
-                      letterSpacing: 2),
-                ),
-                AnimatedContainer(
-                  duration: Duration(milliseconds: 100),
-                  height: 40.0,
-                  width: 100,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50),
-                    color: helmetflag
-                        ? Colors.greenAccent[100]
-                        : Colors.redAccent[100].withOpacity(0.5),
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Icon(Icons.child_friendly, color: Colors.black, size: 30),
+                  Text(
+                    "HELMET STATUS",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        fontSize: 20.0,
+                        letterSpacing: 2),
                   ),
-                  child: Stack(
-                    children: <Widget>[
-                      AnimatedPositioned(
-                        duration: Duration(milliseconds: 100),
-                        curve: Curves.easeIn,
-                        top: 3.0,
-                        left: helmetflag ? 60.0 : 0.0,
-                        right: helmetflag ? 0.0 : 60.0,
-                        child: InkWell(
-                          onTap: helmetStatusButton,
-                          child: AnimatedSwitcher(
-                              duration: Duration(milliseconds: 100),
-                              // ignore: missing_return
-                              transitionBuilder:
-                                  (Widget child, Animation<double> animation) {
-                                return RotationTransition(
-                                  child: child,
-                                  turns: animation,
-                                );
-                              },
-                              child: helmetflag
-                                  ? Icon(
-                                Icons.check_circle_outline,
-                                color: Colors.green,
-                                size: 35.0,
-                              )
-                                  : Icon(
-                                Icons.remove_circle_outline,
-                                color: Colors.red,
-                                size: 35.0,
-                              )),
+                  AnimatedContainer(
+                    duration: Duration(milliseconds: 100),
+                    height: 40.0,
+                    width: 100,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      color: helmetflag
+                          ? Colors.greenAccent[100]
+                          : Colors.redAccent[100].withOpacity(0.5),
+                    ),
+                    child: Stack(
+                      children: <Widget>[
+                        AnimatedPositioned(
+                          duration: Duration(milliseconds: 100),
+                          curve: Curves.easeIn,
+                          top: 3.0,
+                          left: helmetflag ? 60.0 : 0.0,
+                          right: helmetflag ? 0.0 : 60.0,
+                          child: InkWell(
+                            onTap: helmetStatusButton,
+                            child: AnimatedSwitcher(
+                                duration: Duration(milliseconds: 100),
+                                // ignore: missing_return
+                                transitionBuilder: (Widget child,
+                                    Animation<double> animation) {
+                                  return RotationTransition(
+                                    child: child,
+                                    turns: animation,
+                                  );
+                                },
+                                child: helmetflag
+                                    ? Icon(
+                                        Icons.check_circle_outline,
+                                        color: Colors.green,
+                                        size: 35.0,
+                                      )
+                                    : Icon(
+                                        Icons.remove_circle_outline,
+                                        color: Colors.red,
+                                        size: 35.0,
+                                      )),
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            ),
+                ],
+              ),
               SizedBox(
                 height: 50,
               ),
@@ -125,8 +128,8 @@ class _SettingsState extends State<Settings> {
                             child: AnimatedSwitcher(
                                 duration: Duration(milliseconds: 100),
                                 // ignore: missing_return
-                                transitionBuilder:
-                                    (Widget child, Animation<double> animation) {
+                                transitionBuilder: (Widget child,
+                                    Animation<double> animation) {
                                   return RotationTransition(
                                     child: child,
                                     turns: animation,
@@ -134,15 +137,15 @@ class _SettingsState extends State<Settings> {
                                 },
                                 child: defaultEnabled
                                     ? Icon(
-                                  Icons.check_circle_outline,
-                                  color: Colors.green,
-                                  size: 35.0,
-                                )
+                                        Icons.check_circle_outline,
+                                        color: Colors.green,
+                                        size: 35.0,
+                                      )
                                     : Icon(
-                                  Icons.remove_circle_outline,
-                                  color: Colors.red,
-                                  size: 35.0,
-                                )),
+                                        Icons.remove_circle_outline,
+                                        color: Colors.red,
+                                        size: 35.0,
+                                      )),
                           ),
                         ),
                       ],
@@ -188,8 +191,8 @@ class _SettingsState extends State<Settings> {
                             child: AnimatedSwitcher(
                                 duration: Duration(milliseconds: 100),
                                 // ignore: missing_return
-                                transitionBuilder:
-                                    (Widget child, Animation<double> animation) {
+                                transitionBuilder: (Widget child,
+                                    Animation<double> animation) {
                                   return RotationTransition(
                                     child: child,
                                     turns: animation,
@@ -197,18 +200,17 @@ class _SettingsState extends State<Settings> {
                                 },
                                 child: rfidflag
                                     ? Icon(
-                                  Icons.check_circle_outline,
-                                  color: Colors.green,
-                                  size: 35.0,
-                                )
+                                        Icons.check_circle_outline,
+                                        color: Colors.green,
+                                        size: 35.0,
+                                      )
                                     : Icon(
-                                  Icons.remove_circle_outline,
-                                  color: Colors.red,
-                                  size: 35.0,
-                                )),
+                                        Icons.remove_circle_outline,
+                                        color: Colors.red,
+                                        size: 35.0,
+                                      )),
                           ),
                         ),
-
                       ],
                     ),
                   ),
@@ -248,8 +250,7 @@ class _SettingsState extends State<Settings> {
                 height: 20,
               ),
               FlatButton(
-                onPressed: () {
-                },
+                onPressed: () {},
                 child: Container(
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
@@ -263,8 +264,7 @@ class _SettingsState extends State<Settings> {
                     color: kbuttonColor,
                     borderRadius: BorderRadius.circular(50),
                   ),
-                  padding:
-                  EdgeInsets.symmetric(vertical: 20, horizontal: 75),
+                  padding: EdgeInsets.symmetric(vertical: 20, horizontal: 75),
                   child: Text(
                     'ADD',
                     style: TextStyle(
@@ -281,6 +281,7 @@ class _SettingsState extends State<Settings> {
       ),
     );
   }
+
   helmetStatusButton() {
     setState(() {
       helmetflag = !helmetflag;

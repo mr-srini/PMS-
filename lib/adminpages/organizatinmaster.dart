@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../constants.dart';
-import '../textfield.dart';
-
+import '../ComponentsAndConstants/constants.dart';
+import '../ComponentsAndConstants/textfield.dart';
 
 TextEditingController cOrgName = TextEditingController();
 TextEditingController cGstin = TextEditingController();
@@ -11,7 +10,7 @@ TextEditingController cEmail = TextEditingController();
 TextEditingController cPhn = TextEditingController();
 TextEditingController cContactPerson = TextEditingController();
 
-String orgName,gstin,address,email,phn,contactPerson;
+String orgName, gstin, address, email, phn, contactPerson;
 
 class OrganizationMaster extends StatefulWidget {
   @override
@@ -21,12 +20,24 @@ class OrganizationMaster extends StatefulWidget {
 class _OrganizationMasterState extends State<OrganizationMaster> {
   @override
   Widget build(BuildContext context) {
-    cOrgName.addListener(() {orgName = cOrgName.text;});
-    cGstin.addListener(() {gstin = cGstin.text;});
-    cAddress.addListener(() {address = cAddress.text;});
-    cEmail.addListener(() {email = cEmail.text;});
-    cPhn.addListener(() {phn = cPhn.text;});
-    cContactPerson.addListener(() {contactPerson = cContactPerson.text;});
+    cOrgName.addListener(() {
+      orgName = cOrgName.text;
+    });
+    cGstin.addListener(() {
+      gstin = cGstin.text;
+    });
+    cAddress.addListener(() {
+      address = cAddress.text;
+    });
+    cEmail.addListener(() {
+      email = cEmail.text;
+    });
+    cPhn.addListener(() {
+      phn = cPhn.text;
+    });
+    cContactPerson.addListener(() {
+      contactPerson = cContactPerson.text;
+    });
     return Scaffold(
       appBar: AppBar(
         title: Text('Organization Master'),
@@ -111,8 +122,7 @@ class _OrganizationMasterState extends State<OrganizationMaster> {
               height: 10,
             ),
             FlatButton(
-              onPressed: () {
-              },
+              onPressed: () {},
               child: Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
@@ -126,8 +136,7 @@ class _OrganizationMasterState extends State<OrganizationMaster> {
                   color: kbuttonColor,
                   borderRadius: BorderRadius.circular(50),
                 ),
-                padding:
-                EdgeInsets.symmetric(vertical: 20, horizontal: 75),
+                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 75),
                 child: Text(
                   'REGISTER',
                   style: TextStyle(

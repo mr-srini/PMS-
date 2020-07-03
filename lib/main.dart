@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'login_page.dart';
-import 'constants.dart';
+import 'ComponentsAndConstants/constants.dart';
 
 void main() => runApp(Starting());
 

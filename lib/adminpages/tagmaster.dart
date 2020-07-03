@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:pms/constants.dart';
-import 'package:pms/textfield.dart';
+import '../ComponentsAndConstants/constants.dart';
+import '../ComponentsAndConstants/textfield.dart';
 
 TextEditingController cRfid = TextEditingController();
 TextEditingController caltrTag = TextEditingController();
 TextEditingController cTagName = TextEditingController();
 
-String rfid,altrTag,tagName;
-
+String rfid, altrTag, tagName;
 
 class TagMaster extends StatefulWidget {
   @override
@@ -16,12 +15,18 @@ class TagMaster extends StatefulWidget {
 
 class _TagMasterState extends State<TagMaster> {
   var statusSelected = 'Active';
-  var _status = ['Active','Inactive'];
+  var _status = ['Active', 'Inactive'];
   @override
   Widget build(BuildContext context) {
-    cRfid.addListener(() {rfid = cRfid.text;});
-    caltrTag.addListener(() {altrTag = caltrTag.text;});
-    cTagName.addListener(() {tagName = cTagName.text;});
+    cRfid.addListener(() {
+      rfid = cRfid.text;
+    });
+    caltrTag.addListener(() {
+      altrTag = caltrTag.text;
+    });
+    cTagName.addListener(() {
+      tagName = cTagName.text;
+    });
     return Scaffold(
       appBar: AppBar(
         title: Text('Tag Master'),
@@ -73,33 +78,29 @@ class _TagMasterState extends State<TagMaster> {
                 width: 400,
                 decoration: BoxDecoration(
                     color: Color(0xff818181),
-                    borderRadius: BorderRadius.circular(50)
-                ),
+                    borderRadius: BorderRadius.circular(50)),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text('Status',
-                      style: TextStyle(
-                          fontSize: 20
-                      ),
+                    Text(
+                      'Status',
+                      style: TextStyle(fontSize: 20),
                     ),
                     SizedBox(
                       width: 10,
                     ),
                     DropdownButton<String>(
-                      items: _status.map((String dropDownItem){
+                      items: _status.map((String dropDownItem) {
                         return DropdownMenuItem<String>(
                           value: dropDownItem,
                           child: Text(
                             dropDownItem,
-                            style: TextStyle(
-                                fontSize: 20
-                            ),
+                            style: TextStyle(fontSize: 20),
                           ),
                         );
                       }).toList(),
-                      onChanged: (String selectedStatus){
+                      onChanged: (String selectedStatus) {
                         setState(() {
                           this.statusSelected = selectedStatus;
                         });
@@ -114,8 +115,7 @@ class _TagMasterState extends State<TagMaster> {
               height: 10,
             ),
             FlatButton(
-              onPressed: () {
-              },
+              onPressed: () {},
               child: Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
@@ -129,8 +129,7 @@ class _TagMasterState extends State<TagMaster> {
                   color: kbuttonColor,
                   borderRadius: BorderRadius.circular(50),
                 ),
-                padding:
-                EdgeInsets.symmetric(vertical: 20, horizontal: 75),
+                padding: EdgeInsets.symmetric(vertical: 20, horizontal: 75),
                 child: Text(
                   'CREATE',
                   style: TextStyle(

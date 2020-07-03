@@ -1,12 +1,11 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:pms/constants.dart';
-import 'package:pms/textfield.dart';
-import 'package:pms/userpages/userstart.dart';
+import 'file:///E:/FlutterProjects/PMS-/lib/ComponentsAndConstants/constants.dart';
+import 'ComponentsAndConstants/textfield.dart';
+import 'file:///E:/FlutterProjects/PMS-/lib/userstart.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-
-import 'adminpages/AdminDashboard.dart';
+import 'package:pms/adminpages/AdminDashboard.dart';
 
 var username = '', password = '';
 
@@ -16,8 +15,21 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController uc = TextEditingController();
-  TextEditingController pc = TextEditingController();
+  TextEditingController uc;
+  TextEditingController pc;
+
+  @override
+  void initState() {
+    uc = TextEditingController();
+    pc = TextEditingController();
+    super.initState();
+  }
+
+  void clear() {
+    uc.clear();
+    pc.clear();
+  }
+
   @override
   Widget build(BuildContext context) {
     uc.addListener(() {
@@ -90,30 +102,33 @@ class _LoginPageState extends State<LoginPage> {
             ),
             FlatButton(
               onPressed: () {
-// ignore: missing_return
                 setState(() {
-//DATABASE VALADITING
+                  //TODO:DATABASE VALADITING
                   if (username == 'Srini' && password == '123') {
-                    Navigator.push(
+                    clear();
+                    return Navigator.push(
                       context,
                       new MaterialPageRoute(
                         builder: (context) => AdminDashboard(),
                       ),
                     );
                   } else if (username == 'Akhil' && password == '123') {
-                    Navigator.push(
+                    clear();
+                    return Navigator.push(
                       context,
                       new MaterialPageRoute(
                         builder: (context) => UserStartPage(),
                       ),
                     );
-                  } else
+                  } else {
+                    clear();
                     return Alert(
                             buttons: [],
                             context: context,
                             type: AlertType.error,
                             title: "Invalid username and password")
                         .show();
+                  }
                 });
               },
               child: Container(
