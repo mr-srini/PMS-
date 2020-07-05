@@ -370,8 +370,11 @@ class _nCheckinState extends State<nCheckin> {
       "idNumber": CinMethods.alternateNumber,
       "vnumber": CinMethods.vehicleNumber,
       "vtype": selecteditem,
+      "rfid_status": rfidflag.toString(),
     };
     print(data);
+    print(rfidflag.toString());
+
     var response =
         await http.post('http://192.168.43.252/www/API/insert.php', body: data);
     try {
