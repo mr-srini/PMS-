@@ -64,30 +64,32 @@ class _nCheckinState extends State<nCheckin> {
                       iconSize: 30.0,
                       splashColor: Colors.lightGreenAccent.withOpacity(0.5),
                     ),
-                    FlatButton(
-                      padding: EdgeInsets.only(
-                          left: 120.0, right: 120.0, top: 15.0, bottom: 15.0),
-                      onPressed: () {
-                        setState(() {
-                          Stream<NDEFMessage> stream = NFC.readNDEF();
-                          stream.listen((NDEFMessage message) {
-                            print(message.data);
-                            _rfidNumber = message.data;
+                    Expanded(
+                      child: FlatButton(
+                        padding: EdgeInsets.only(
+                            left: 120.0, right: 120.0, top: 15.0, bottom: 15.0),
+                        onPressed: () {
+                          setState(() {
+                            Stream<NDEFMessage> stream = NFC.readNDEF();
+                            stream.listen((NDEFMessage message) {
+                              print(message.data);
+                              _rfidNumber = message.data;
+                            });
                           });
-                        });
-                      },
-                      child: Center(
-                        child: Text(
-                          _rfidNumber,
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.bold),
+                        },
+                        child: Center(
+                          child: Text(
+                            _rfidNumber,
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.bold),
+                          ),
                         ),
-                      ),
-                      shape: RoundedRectangleBorder(
-                        side: BorderSide(color: Colors.blue, width: 3.0),
-                        borderRadius: BorderRadius.circular(12.0),
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(color: Colors.blue, width: 3.0),
+                          borderRadius: BorderRadius.circular(12.0),
+                        ),
                       ),
                     ),
                   ],
