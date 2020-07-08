@@ -56,11 +56,9 @@ class _LoginPageState extends State<LoginPage> {
             isConnected = true;
             sharedPreferences.setBool('isloggedIn', true);
             var userJson = json.decode(response.body);
-//             print(userJson);
             for (var user in userJson) {
               users.insert(0, UserMasterMO.fromJson(user));
             }
-//               sharedPreferences.setString("token",userJson["token"] );
             nameDisp = users[0].userName.toString();
             if (users.length == 1) {
 //                 print("Connected");

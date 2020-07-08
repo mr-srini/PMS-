@@ -3,15 +3,16 @@ import 'dart:convert';
 import 'package:esc_pos_printer/esc_pos_printer.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:pms/ModelClasses/check_in_print.dart';
+import 'package:pms/ModelClasses/check_out_print.dart';
 import 'package:pms/ModelClasses/check_out_print2.dart';
+import 'package:pms/UserPages2.0/Methods/CoutFormFields.dart';
 
-class BluetoothPrint extends StatefulWidget {
+class BluetoothPrintCheckOut extends StatefulWidget {
   @override
-  _BluetoothPrintState createState() => _BluetoothPrintState();
+  _BluetoothPrintCheckOutState createState() => _BluetoothPrintCheckOutState();
 }
 
-class _BluetoothPrintState extends State<BluetoothPrint> {
+class _BluetoothPrintCheckOutState extends State<BluetoothPrintCheckOut> {
   String organistion,
       receiptno,
       vechiletype,
@@ -19,16 +20,17 @@ class _BluetoothPrintState extends State<BluetoothPrint> {
       indate,
       phnumber,
       email,
-      address;
+      address,
+      duration,
+      fee,
+      outdate;
   PrinterBluetoothManager printerManager = PrinterBluetoothManager();
   List<PrinterBluetooth> _devices = [];
   bool _loading = false;
-  var t_table = List<CheckInPrint>();
-  var o_table = List<CheckOutPrint2>();
   @override
   void initState() {
-    _loading = true;
-    fetchDetails();
+    _loading = false;
+    fetchDetailsOut();
     super.initState();
   }
 
@@ -52,7 +54,7 @@ class _BluetoothPrintState extends State<BluetoothPrint> {
                 onTap: () async {
                   //TODO: FETCH THE CALCULATED DETAILS OF THE TICKET AND PRINT
 
-                  bluetoothPrint(position);
+                  bluetoothPrintOut(position);
                 },
                 title: Text(_devices[position].name),
                 subtitle: Text(_devices[position].address),
@@ -76,19 +78,7 @@ class _BluetoothPrintState extends State<BluetoothPrint> {
     );
   }
 
-  List<int> returnTid(String source) {
-    int size = source.length;
-    List<int> tid = new List();
-    int temp;
-    for (int i = 0; i <= size - 1; i++) {
-      temp = int.parse(source[i]);
-      print(temp);
-      tid.add(temp);
-    }
-    return tid;
-  }
-
-  bluetoothPrint(position) {
+  bluetoothPrintOut(position) {
     printerManager.selectPrinter(_devices[position]);
     Ticket ticket = Ticket(PaperSize.mm58);
     ticket.text('$organistion'.toUpperCase(),
@@ -163,15 +153,34 @@ class _BluetoothPrintState extends State<BluetoothPrint> {
     ticket.emptyLines(1);
     ticket.row([
       PosColumn(
-        text: 'IN DATE: $indate',
+        text: 'OUT DATE: $outdate',
         width: 12,
         styles:
             PosStyles(align: PosTextAlign.left, underline: false, bold: true),
       ),
     ]);
+    ticket.row([
+      PosColumn(
+        text: 'DURATION: $duration',
+        width: 12,
+        styles:
+            PosStyles(align: PosTextAlign.left, underline: false, bold: true),
+      ),
+    ]);
+    ticket.row([
+      PosColumn(
+        text: 'Grand Total: $fee',
+        width: 12,
+        styles: PosStyles(
+          align: PosTextAlign.left,
+          underline: false,
+          bold: true,
+          height: PosTextSize.size2,
+          width: PosTextSize.size2,
+        ),
+      ),
+    ]);
     ticket.emptyLines(2);
-    final List<dynamic> barData = returnTid("$receiptno");
-    ticket.barcode(Barcode.code39(barData));
     ticket.feed(1);
     ticket.cut();
     printerManager.printTicket(ticket).then((result) {
@@ -182,9 +191,14 @@ class _BluetoothPrintState extends State<BluetoothPrint> {
     });
   }
 
-  Future<void> fetchDetails() async {
-    var response =
-        await http.post('http://192.168.43.252/www/API/BluetoothAPI.php');
+  Future<void> fetchDetailsOut() async {
+    CoutWidgets Cout = new CoutWidgets();
+    Map data = {
+      "ticket_number": Cout.getTicketNumber(),
+    };
+    print(data);
+    var response = await http
+        .post('http://192.168.43.252/www/API/CheckOutPrint.php', body: data);
     var response2 =
         await http.post('http://192.168.43.252/www/API/BluetoothAPI2.php');
 
@@ -192,29 +206,34 @@ class _BluetoothPrintState extends State<BluetoothPrint> {
       if (response.statusCode == 200) {
         var jsonResponse = json.decode(response.body);
         var jsonResponse2 = json.decode(response2.body);
-
-        for (var types in jsonResponse) {
-          receiptno = (CheckInPrint.fromJson(types).transactionId);
-          vechiletype = (CheckInPrint.fromJson(types).vehicleType);
-          vehcilenumber = (CheckInPrint.fromJson(types).vehicleNumber);
-          indate = (CheckInPrint.fromJson(types).checkinTime.toIso8601String());
-        }
-        for (var types in jsonResponse2) {
-          organistion =
-              (CheckInPrint.fromJson(types).organizationName.toUpperCase());
-
-          phnumber = (CheckInPrint.fromJson(types).phonenumber);
-          email = (CheckInPrint.fromJson(types).email);
-          address = (CheckInPrint.fromJson(types).address);
-        }
-
-        print(receiptno);
+        print(jsonResponse);
+        print(jsonResponse2);
+//        for (var types in jsonResponse) {
+//          receiptno = (CheckOutPrint.fromJson(types).transactionId);
+//          vechiletype = (CheckOutPrint.fromJson(types).vehicleType);
+//          vehcilenumber = (CheckOutPrint.fromJson(types).vehicleNumber);
+//          indate =
+//              (CheckOutPrint.fromJson(types).checkinTime.toIso8601String());
+//          outdate =
+//              (CheckOutPrint.fromJson(types).checkinTime.toIso8601String());
+//          duration = (CheckOutPrint.fromJson(types).totalTime);
+//          fee = (CheckOutPrint.fromJson(types).grandTotal);
+//        }
+//        for (var types in jsonResponse2) {
+//          organistion =
+//              (CheckOutPrint2.fromJson(types).organizationName.toUpperCase());
+//          phnumber = (CheckOutPrint2.fromJson(types).phonenumber);
+//          email = (CheckOutPrint2.fromJson(types).email);
+//          address = (CheckOutPrint2.fromJson(types).address);
+//        }
+//
+//        print(receiptno);
       }
     } catch (Exception) {
       print("GOthilla");
     }
     setState(() {
-      _loading = false;
+      _loading = true;
     });
   }
 }

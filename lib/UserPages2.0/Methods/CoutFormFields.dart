@@ -8,7 +8,7 @@ class CoutWidgets {
   FocusNode _fVehicle = FocusNode();
   bool readOnly = false;
   FocusNode _fTicketNumber = FocusNode();
-  String alternateNumber, vehicleNumber, ticketNumber;
+  String alternateNumber = null, vehicleNumber, ticketNumber;
 
   void clear() {
     _cTicketNumber.clear();
@@ -22,6 +22,10 @@ class CoutWidgets {
     _cTicketNumber = TextEditingController(text: qrcode);
     ticketNumber = qrcode;
     readOnly = true;
+  }
+
+  getTicketNumber() {
+    return ticketNumber;
   }
 
   Widget buildANumber(BuildContext context) {

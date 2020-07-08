@@ -7,12 +7,13 @@ class CinWidgets {
   FocusNode _fAlternate = FocusNode();
   FocusNode _fVehicle = FocusNode();
   FocusNode _fNumberHelmet = FocusNode();
-  String alternateNumber, vehicleNumber, numberOfHelmet;
+  String alternateNumber = "", vehicleNumber, numberOfHelmet = "0";
 
   void clear() {
     _cNumberOfHelmet.clear();
     _cVehicleNumber.clear();
     _cAlternateNumber.clear();
+    alternateNumber = "";
   }
 
   Widget buildANumber(BuildContext context) {

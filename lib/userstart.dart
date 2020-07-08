@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:pms/ComponentsAndConstants//clipper.dart';
 import 'package:pms/ComponentsAndConstants//constants.dart';
@@ -52,14 +53,51 @@ class _UserStartPageState extends State<UserStartPage> {
       ),
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Welcome'),
+          titleSpacing: 30,
+          elevation: 0.0,
+          title: Row(
+            children: <Widget>[
+              Text(
+                "Fusion",
+                style: TextStyle(
+                    fontSize: 30.0,
+                    fontWeight: FontWeight.w300,
+                    fontStyle: FontStyle.italic),
+              ),
+              Text(
+                "Minds",
+                style: TextStyle(
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.redAccent,
+                ),
+              ),
+            ],
+          ),
           backgroundColor: Color(0xFF3383CD),
           actions: <Widget>[
-            FlatButton(
+//            FlatButton(
+//              onPressed: () {
+//
+//              },
+//              child: Icon(
+//                Icons.power_settings_new,
+//                color: Colors.red,
+//              ),
+//            )
+            IconButton(
+              tooltip: "Sign off",
+              iconSize: 30,
+              splashColor: Colors.red,
+              padding: const EdgeInsets.only(right: 30.0),
+              icon: Icon(
+                Icons.power_settings_new,
+                color: Colors.black,
+              ),
               onPressed: () {
                 logoutUser();
               },
-              child: Icon(Icons.power_settings_new),
+              color: Colors.red,
             )
           ],
         ),
@@ -73,16 +111,18 @@ class _UserStartPageState extends State<UserStartPage> {
                 child: Container(
                   child: Container(
                     alignment: AlignmentDirectional.center,
-//                  child: FadeAnimatedTextKit(
-//                    onTap: () {},
-////                    ${}
-//                    text: ["Hello,${nameDisp}", "Have a good day."],
-//                    textStyle: TextStyle(
-//                        fontSize: 70.0,
-//                        fontWeight: FontWeight.bold,
-//                        color: ktextColor),
-//                  ),
-                    child: Text(nameDisp.toString()),
+                    child: FadeAnimatedTextKit(
+                      onTap: () {},
+                      text: [
+                        "Hello",
+                        "$nameDisp".toUpperCase(),
+                        "Have a good day."
+                      ],
+                      textStyle: TextStyle(
+                          fontSize: 70.0,
+                          fontWeight: FontWeight.bold,
+                          color: ktextColor),
+                    ),
                   ),
                   padding: EdgeInsets.only(left: 40, top: 50, right: 20),
                   height: 450,
@@ -115,7 +155,7 @@ class _UserStartPageState extends State<UserStartPage> {
                   margin: EdgeInsets.all(5),
                   padding: EdgeInsets.symmetric(vertical: 25, horizontal: 100),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50),
+                    borderRadius: BorderRadius.circular(15),
                     color: kbuttonColor,
                     gradient: LinearGradient(
                       begin: Alignment.topRight,
@@ -149,7 +189,7 @@ class _UserStartPageState extends State<UserStartPage> {
                   margin: EdgeInsets.all(5),
                   padding: EdgeInsets.symmetric(vertical: 25, horizontal: 92),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50),
+                    borderRadius: BorderRadius.circular(15),
                     color: kbuttonColor,
                     gradient: LinearGradient(
                       begin: Alignment.topRight,

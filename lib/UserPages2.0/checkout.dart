@@ -3,6 +3,9 @@ import 'dart:convert';
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/material.dart';
 import 'package:nfc_in_flutter/nfc_in_flutter.dart';
+import 'package:pms/ModelClasses/ticketInit.dart';
+import 'package:pms/Printing/bluetoothprintercheckout.dart';
+import 'package:pms/login_page.dart';
 import '../UserPages2.0/Methods/CoutFormFields.dart';
 import 'package:pms/Printing/bluetoothprinter.dart';
 import '../ComponentsAndConstants/constants.dart';
@@ -21,6 +24,7 @@ class _nCheckoutState extends State<nCheckout> {
   int groupValue = 1;
   String qrCodeResult = "SCAN TO KNOW THE QR RESULTS";
   String _rfidNumber = "RFID SCAN";
+  TicketInit TicketNumberObject;
   // ignore: non_constant_identifier_names
   CoutWidgets CoutMethods = CoutWidgets();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -119,6 +123,8 @@ class _nCheckoutState extends State<nCheckout> {
                       IconButton(
                         onPressed: () {
                           setState(() {
+                            getTicketNumberFromAlternateId(
+                                CoutMethods.alternateNumber);
                             Stream<NDEFMessage> stream = NFC.readNDEF();
                             stream.listen((NDEFMessage message) {
                               print(message.data);
@@ -331,16 +337,15 @@ class _nCheckoutState extends State<nCheckout> {
                   ),
                   onPressed: () {
                     validate();
-                    checkout();
                     setState(() {
                       if (isprint && validated)
                         Navigator.push(
                           context,
                           new MaterialPageRoute(
-                            builder: (context) => BluetoothPrint(),
+                            builder: (context) => BluetoothPrintCheckOut(),
                           ),
                         );
-                      _rfidNumber = "RFID SCAN";
+                      _rfidNumber = "Scan RFID Card";
                       CoutMethods.readOnly = false;
                     });
                   },
@@ -390,7 +395,7 @@ class _nCheckoutState extends State<nCheckout> {
                   codeScanner = await BarcodeScanner.scan();
                   setState(() {
                     qrCodeResult = codeScanner.rawContent;
-                    CoutMethods.setTicketNumber(qrCodeResult);
+                    getTicketNumberFromScanner(qrCodeResult);
                   });
                 },
                 child: Text(
@@ -429,11 +434,8 @@ class _nCheckoutState extends State<nCheckout> {
 
   validate() {
     if (_formKey.currentState.validate()) {
+      checkout();
       validated = true;
-//      print(CoutMethods.vehicleNumber);
-//      print(CoutMethods.alternateNumber);
-      print(CoutMethods.ticketNumber);
-      //TODO:Instead of print() hit API to insert into DB
       CoutMethods.clear();
       return;
     } else {
@@ -447,19 +449,78 @@ class _nCheckoutState extends State<nCheckout> {
     });
   }
 
-  Future<void> checkout() async {
-    Map data = {'transaction_id': CoutMethods.ticketNumber};
+  Future<void> getTicketNumberFromScanner(String codeResult) async {
+    Map data = {
+      'transaction_id': codeResult,
+    };
     print(data);
-    var response = await http
-        .post('http://192.168.43.252/www/PHP/VehiclePass.php', body: data);
+    var response = await http.post(
+        'http://192.168.43.252/www/API/getTicketNumberTid.php',
+        body: data);
     try {
       if (response.statusCode == 200) {
         print("inside");
-        var userJson = json.decode(response.body);
-        print(userJson);
+        var ticketNumberJason = json.decode(response.body);
+        print(ticketNumberJason);
+        for (var tnumber in ticketNumberJason) {
+          TicketNumberObject = TicketInit.fromJson(tnumber);
+        }
+        print(TicketNumberObject.ticketNumber);
+        setState(() {
+          /*if (TicketNumberObject.ticketNumber == false) {
+            //TODO: ALTER MESSAGE AID DOESNT EXITS.
+          } else*/
+          CoutMethods.setTicketNumber(TicketNumberObject.ticketNumber);
+        });
       }
     } catch (Exception) {
-      print("Gothilla");
+      print("ERROR");
+    }
+  }
+
+  Future<void> getTicketNumberFromAlternateId(String alterNumber) async {
+    Map data = {
+      'alternate_id': alterNumber,
+    };
+    print(data);
+    var response = await http.post(
+        'http://192.168.43.252/www/API/getTicketNumberAid.php',
+        body: data);
+    try {
+      if (response.statusCode == 200) {
+        print("inside");
+        var ticketNumberJason = json.decode(response.body);
+        print(ticketNumberJason);
+        for (var tnumber in ticketNumberJason) {
+          TicketNumberObject = TicketInit.fromJson(tnumber);
+        }
+        print(TicketNumberObject.ticketNumber);
+        setState(() {
+          if (TicketNumberObject.ticketNumber == false) {
+            //TODO: ALTER MESSAGE AID DOESNT EXITS.
+          } else
+            CoutMethods.setTicketNumber(TicketNumberObject.ticketNumber);
+        });
+      }
+    } catch (Exception) {
+      print("ERROR");
+    }
+  }
+
+  Future<void> checkout() async {
+    Map data = {
+      "ticket_number": CoutMethods.ticketNumber,
+      "user_name": nameDisp,
+    };
+    print(data);
+    var response =
+        await http.post('http://192.168.43.252/www/API/update.php', body: data);
+    try {
+      if (response.statusCode == 200) {
+        print("inside");
+      }
+    } catch (Exception) {
+      print("ERROR");
     }
   }
 }
