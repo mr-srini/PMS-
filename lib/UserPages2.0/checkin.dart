@@ -382,7 +382,6 @@ class _nCheckinState extends State<nCheckin> {
     if (_formKey.currentState.validate()) {
       validated = true;
       checkinInsert();
-      //TODO:Instead of print() hit API to insert into DB
       CinMethods.clear();
       return;
     } else {

@@ -23,7 +23,9 @@ class _BluetoothPrintCheckOutState extends State<BluetoothPrintCheckOut> {
       address,
       duration,
       fee,
+      ticketnumber,
       outdate;
+  CoutWidgets Cout = new CoutWidgets();
   PrinterBluetoothManager printerManager = PrinterBluetoothManager();
   List<PrinterBluetooth> _devices = [];
   bool _loading = false;
@@ -192,9 +194,8 @@ class _BluetoothPrintCheckOutState extends State<BluetoothPrintCheckOut> {
   }
 
   Future<void> fetchDetailsOut() async {
-    CoutWidgets Cout = new CoutWidgets();
     Map data = {
-      "ticket_number": Cout.getTicketNumber(),
+      "ticket_number": Cout.ticketNumber,
     };
     print(data);
     var response = await http
@@ -208,30 +209,31 @@ class _BluetoothPrintCheckOutState extends State<BluetoothPrintCheckOut> {
         var jsonResponse2 = json.decode(response2.body);
         print(jsonResponse);
         print(jsonResponse2);
-//        for (var types in jsonResponse) {
-//          receiptno = (CheckOutPrint.fromJson(types).transactionId);
-//          vechiletype = (CheckOutPrint.fromJson(types).vehicleType);
-//          vehcilenumber = (CheckOutPrint.fromJson(types).vehicleNumber);
-//          indate =
-//              (CheckOutPrint.fromJson(types).checkinTime.toIso8601String());
-//          outdate =
-//              (CheckOutPrint.fromJson(types).checkinTime.toIso8601String());
-//          duration = (CheckOutPrint.fromJson(types).totalTime);
-//          fee = (CheckOutPrint.fromJson(types).grandTotal);
-//        }
-//        for (var types in jsonResponse2) {
-//          organistion =
-//              (CheckOutPrint2.fromJson(types).organizationName.toUpperCase());
-//          phnumber = (CheckOutPrint2.fromJson(types).phonenumber);
-//          email = (CheckOutPrint2.fromJson(types).email);
-//          address = (CheckOutPrint2.fromJson(types).address);
-//        }
+        for (var types in jsonResponse) {
+          receiptno = (CheckOutPrint.fromJson(types).transactionId);
+          vechiletype = (CheckOutPrint.fromJson(types).vehicleType);
+          vehcilenumber = (CheckOutPrint.fromJson(types).vehicleNumber);
+          indate =
+              (CheckOutPrint.fromJson(types).checkinTime.toIso8601String());
+          outdate =
+              (CheckOutPrint.fromJson(types).checkinTime.toIso8601String());
+          duration = (CheckOutPrint.fromJson(types).totalTime);
+          fee = (CheckOutPrint.fromJson(types).grandTotal);
+        }
+        for (var types in jsonResponse2) {
+          organistion =
+              (CheckOutPrint2.fromJson(types).organizationName.toUpperCase());
+          phnumber = (CheckOutPrint2.fromJson(types).phonenumber);
+          email = (CheckOutPrint2.fromJson(types).email);
+          address = (CheckOutPrint2.fromJson(types).address);
+        }
 //
 //        print(receiptno);
       }
     } catch (Exception) {
       print("GOthilla");
     }
+
     setState(() {
       _loading = true;
     });

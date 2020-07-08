@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/material.dart';
 import 'package:nfc_in_flutter/nfc_in_flutter.dart';
@@ -7,7 +6,6 @@ import 'package:pms/ModelClasses/ticketInit.dart';
 import 'package:pms/Printing/bluetoothprintercheckout.dart';
 import 'package:pms/login_page.dart';
 import '../UserPages2.0/Methods/CoutFormFields.dart';
-import 'package:pms/Printing/bluetoothprinter.dart';
 import '../ComponentsAndConstants/constants.dart';
 import '../ComponentsAndConstants/flags.dart';
 import 'package:http/http.dart' as http;
@@ -20,7 +18,7 @@ class nCheckout extends StatefulWidget {
 
 // ignore: camel_case_types
 class _nCheckoutState extends State<nCheckout> {
-  ScanResult codeScanner;
+  ScanResult codeScanner, GlobalTNumber;
   int groupValue = 1;
   String qrCodeResult = "SCAN TO KNOW THE QR RESULTS";
   String _rfidNumber = "RFID SCAN";
@@ -436,7 +434,7 @@ class _nCheckoutState extends State<nCheckout> {
     if (_formKey.currentState.validate()) {
       checkout();
       validated = true;
-      CoutMethods.clear();
+
       return;
     } else {
       _formKey.currentState.save();
@@ -467,10 +465,10 @@ class _nCheckoutState extends State<nCheckout> {
         }
         print(TicketNumberObject.ticketNumber);
         setState(() {
-          /*if (TicketNumberObject.ticketNumber == false) {
+          if (TicketNumberObject.ticketNumber == false) {
             //TODO: ALTER MESSAGE AID DOESNT EXITS.
-          } else*/
-          CoutMethods.setTicketNumber(TicketNumberObject.ticketNumber);
+          } else
+            CoutMethods.setTicketNumber(TicketNumberObject.ticketNumber);
         });
       }
     } catch (Exception) {

@@ -17,15 +17,11 @@ class CoutWidgets {
   }
 
   // ignore: missing_return
-  String setTicketNumber(String qrcode) {
+  String setTicketNumber(String ticketnumber) {
     //TODO: FETCH TICKET ID USING QRCODE AND INITIALISE TO ticketnumber
-    _cTicketNumber = TextEditingController(text: qrcode);
-    ticketNumber = qrcode;
+    _cTicketNumber = TextEditingController(text: ticketnumber);
+    ticketNumber = ticketnumber;
     readOnly = true;
-  }
-
-  getTicketNumber() {
-    return ticketNumber;
   }
 
   Widget buildANumber(BuildContext context) {
